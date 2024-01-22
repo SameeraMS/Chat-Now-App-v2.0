@@ -5,18 +5,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lk.ijse.client.Client;
+import lk.ijse.dto.UserDto;
+import lk.ijse.model.UserModel;
 import lk.ijse.server.Server;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class LoginFormController {
@@ -36,12 +41,52 @@ public class LoginFormController {
     }
 
     public void btnLoginOnAction(ActionEvent actionEvent) throws IOException {
-        load();
-        txtName.clear();
+
+        if (!txtName.getText().isEmpty() || !txtPassword.getText().isEmpty()) {
+            String username = txtName.getText();
+            String password = txtPassword.getText();
+
+            boolean isExists = false;
+            try {
+                isExists = UserModel.existsUser(username);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            if (isExists) {
+                try {
+                    UserDto userDto = UserModel.userDetails(username);
+                    if (!userDto.getPassword().equals(password)) {
+                        new Alert(Alert.AlertType.WARNING, "Invalid username or password", ButtonType.OK).show();
+                    } else {
+
+                        if (userDto.getImage() != null){
+                            imageView = new ImageView(new Image(userDto.getImage()));
+                        } else {
+                            imageView = new ImageView(new Image("/asserts/images/images.png"));
+                        }
+
+                        load();
+                        txtName.clear();
+                        txtPassword.clear();
+                    }
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+
+            }else{
+                new Alert(Alert.AlertType.WARNING, "Invalid username or password", ButtonType.OK).show();
+            }
+        }else{
+            new Alert(Alert.AlertType.WARNING, "Username and password are required", ButtonType.OK).show();
+        }
+
+
+
     }
 
     private void load() throws IOException {
-        if (Pattern.matches("^[a-zA-Z\\s]+", txtName.getText())) {
+
             Client client = new Client(txtName.getText(), imageView);
             Thread thread = new Thread(client);
             thread.start();
@@ -54,7 +99,7 @@ public class LoginFormController {
 
             stage.setTitle(txtName.getText()+"'s Chat");
             stage.setAlwaysOnTop(true);
-        }
+
     }
 
     private void startServer() throws IOException {
