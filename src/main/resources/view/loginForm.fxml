@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
@@ -21,17 +22,17 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="162.0" layoutY="289.0" prefHeight="58.0" prefWidth="246.0" text="Join Live Chat" textFill="#5d3587">
+      <Label layoutX="162.0" layoutY="283.0" prefHeight="58.0" prefWidth="246.0" text="Join Live Chat" textFill="#5d3587">
          <font>
             <Font name="System Bold" size="40.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtName" alignment="CENTER" focusColor="#5d3587" layoutX="95.0" layoutY="387.0" onAction="#txtUsernameOnAction" prefHeight="31.0" prefWidth="396.0" promptText="Enter your username" style="-fx-prompt-text-fill: 5D3587; -fx-text-fill: 5D3587;" unFocusColor="#5d3587">
+      <JFXTextField fx:id="txtName" alignment="CENTER" focusColor="#5d3587" layoutX="95.0" layoutY="380.0" onAction="#txtUsernameOnAction" prefHeight="31.0" prefWidth="396.0" promptText="Enter Your Username" style="-fx-prompt-text-fill: 5D3587; -fx-text-fill: 5D3587;" unFocusColor="#5d3587">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="208.0" layoutY="516.0" onAction="#btnLoginOnAction" prefHeight="31.0" prefWidth="154.0" style="-fx-background-color: #5D3587; -fx-background-radius: 8px;" text="Login" textFill="WHITE">
+      <JFXButton layoutX="157.0" layoutY="510.0" onAction="#btnLoginOnAction" prefHeight="35.0" prefWidth="256.0" style="-fx-background-color: #5D3587; -fx-background-radius: 8px;" text="Login" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -39,15 +40,15 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Label layoutX="181.0" layoutY="565.0" onMouseClicked="#btnSignupOnAction" text="Don't have an account! Sign up" textFill="#5d3587">
+      <Label layoutX="181.0" layoutY="558.0" onMouseClicked="#btnSignupOnAction" text="Don't have an account! Sign up" textFill="#5d3587">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txtPassword" alignment="CENTER" focusColor="#5d3587" layoutX="95.0" layoutY="453.0" onAction="#txtPasswordOnAction" prefHeight="31.0" prefWidth="396.0" promptText="Enter Password" style="-fx-prompt-text-fill: 5D3587; -fx-text-fill: 5D3587;" unFocusColor="#5d3587">
+      <JFXPasswordField fx:id="txtPassword" alignment="CENTER" focusColor="#5d3587" layoutX="95.0" layoutY="446.0" onAction="#txtPasswordOnAction" prefHeight="40.0" prefWidth="396.0" promptText="Enter Your Password" style="-fx-prompt-text-fill: 5D3587; -fx-text-fill: 5D3587;" unFocusColor="#5d3587">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
-      </JFXTextField>
+      </JFXPasswordField>
    </children>
 </AnchorPane>

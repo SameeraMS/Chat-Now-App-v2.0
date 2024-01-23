@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -47,7 +48,6 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXTextField fx:id="txtpw1" focusColor="#5d3587" layoutX="173.0" layoutY="470.0" prefHeight="31.0" prefWidth="277.0" promptText="Enter Password" style="-fx-text-fill: #5d3587; -fx-prompt-text-fill: #5d3587;" unFocusColor="#5d3587" />
       <JFXTextField fx:id="txtname" focusColor="#5d3587" layoutX="173.0" layoutY="415.0" prefHeight="31.0" prefWidth="277.0" promptText="Enter username" style="-fx-prompt-text-fill: #5d3587; -fx-text-fill: #5d3587;" unFocusColor="#5d3587" />
       <JFXButton contentDisplay="GRAPHIC_ONLY" layoutX="18.0" layoutY="24.0" onAction="#btnBackOnAction" prefHeight="52.0" prefWidth="57.0" ripplerFill="#2f3e46">
          <graphic>
@@ -58,6 +58,7 @@
             </ImageView>
          </graphic>
       </JFXButton>
-      <JFXTextField fx:id="txtpw2" focusColor="#5d3587" layoutX="173.0" layoutY="525.0" prefHeight="31.0" prefWidth="277.0" promptText="Re-Enter Password" style="-fx-text-fill: #5d3587; -fx-prompt-text-fill: #5d3587;" unFocusColor="#5d3587" />
+      <JFXPasswordField fx:id="txtpw1" focusColor="#5d3587" layoutX="173.0" layoutY="470.0" prefHeight="31.0" prefWidth="277.0" promptText="Enter Password" style="-fx-text-fill: #5d3587; -fx-prompt-text-fill: #5d3587;" unFocusColor="#5d3587" />
+      <JFXPasswordField fx:id="txtpw2" focusColor="#5d3587" layoutX="173.0" layoutY="525.0" prefHeight="31.0" prefWidth="277.0" promptText="Re-Enter Password" style="-fx-text-fill: #5d3587; -fx-prompt-text-fill: #5d3587;" unFocusColor="#5d3587" />
    </children>
 </AnchorPane>

@@ -1,5 +1,6 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +30,8 @@ public class LoginFormController {
 
     public static String name;
     public ImageView imageView;
-    public JFXTextField txtPassword;
+    public JFXPasswordField txtPassword;
+
     private File file;
 
     public void initialize() throws IOException {

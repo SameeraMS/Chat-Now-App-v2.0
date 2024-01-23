@@ -131,6 +131,7 @@ public class ChatFormController {
             messageLbl.setStyle("-fx-background-color: rgb(128,128,128);-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
             hBox.getChildren().add(messageLbl);
             vBox.getChildren().add(hBox);
+        //    System.out.println(message);   //my msg
         } else {
             HBox hBox = new HBox();
             hBox.setStyle("-fx-alignment: center-right;-fx-fill-height: true;-fx-min-height: 50;-fx-pref-width: 520;-fx-max-width: 520;-fx-padding: 10");
@@ -138,6 +139,8 @@ public class ChatFormController {
             messageLbl.setStyle("-fx-background-color:  purple;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
             hBox.getChildren().add(messageLbl);
             vBox.getChildren().add(hBox);
+         //   System.out.println(message);   //my msg
+
         }
     }
 
@@ -203,5 +206,6 @@ public class ChatFormController {
             messageLbl.setStyle("-fx-background-color:   #2980b9;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
             hBox.getChildren().add(messageLbl);
             Platform.runLater(() -> vBox.getChildren().add(hBox));
+         //   System.out.println(message);  //with sender name
     }
 }

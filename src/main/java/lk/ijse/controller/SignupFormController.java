@@ -1,5 +1,6 @@
 package lk.ijse.controller;
 
+import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +19,9 @@ import java.sql.SQLException;
 
 public class SignupFormController {
     public ImageView imageView;
-    public JFXTextField txtpw1;
+    public JFXPasswordField txtpw1;
     public JFXTextField txtname;
-    public JFXTextField txtpw2;
+    public JFXPasswordField txtpw2;
     private File file;
 
     public void btnSignupOnAction(ActionEvent actionEvent) {
