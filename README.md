@@ -21,6 +21,8 @@ To run the chat application, follow these steps:
 4. Signup with your username
 5. Login and chat..
 
-<img height="500" src="/Users/sameeramadushan/Desktop/1.png" title="login" width="400"/>
-<img height="500" src="/Users/sameeramadushan/Desktop/2.png" title="signin" width="400"/>
-<img height="500" src="/Users/sameeramadushan/Desktop/3.png" title="chat" width="400"/>
+
+<img width="400" alt="1" src="https://github.com/SameeraMS/Chat-Now-App-v2.0/assets/137902086/8b7b45f1-0f16-4c89-a120-591b732adfa6">
+<img width="400" alt="2" src="https://github.com/SameeraMS/Chat-Now-App-v2.0/assets/137902086/14f0765b-731f-4837-aa97-58d2dd1dd5ee">
+<img width="400" alt="3" src="https://github.com/SameeraMS/Chat-Now-App-v2.0/assets/137902086/a7684bc8-9b3c-4cc3-be3a-1ae61dd117e8">
+
