@@ -88,20 +88,9 @@ public class LoginFormController {
     }
 
     private void load() throws IOException {
-
             Client client = new Client(txtName.getText(), imageView);
             Thread thread = new Thread(client);
             thread.start();
-
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("/view/chatForm.fxml"));
-            Parent root = fxmlLoader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-
-            stage.setTitle(txtName.getText()+"'s Chat");
-            stage.setAlwaysOnTop(true);
-
     }
 
     private void startServer() throws IOException {
