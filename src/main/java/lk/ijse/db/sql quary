@@ -7,3 +7,10 @@ CREATE TABLE user(
                      password VARCHAR(20),
                      image LONGBLOB
 );
+
+CREATE TABLE chat(
+                     username VARCHAR(20),
+                     id VARCHAR(20),
+                     massage VARCHAR(250),
+                     image LONGBLOB
+);
