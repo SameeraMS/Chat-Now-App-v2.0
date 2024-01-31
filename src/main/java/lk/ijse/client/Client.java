@@ -13,6 +13,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.net.Socket;
+import java.sql.SQLException;
 
 public class Client implements Runnable, Serializable {
 
@@ -46,7 +47,7 @@ public class Client implements Runnable, Serializable {
 
         try {
             loadScene();
-        } catch (IOException e) {
+        } catch (IOException | SQLException e) {
             throw new RuntimeException(e);
         }
     }
@@ -71,6 +72,8 @@ public class Client implements Runnable, Serializable {
                 } catch (IOException ignored) {
 
                 }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -87,7 +90,7 @@ public class Client implements Runnable, Serializable {
         outputStream.flush();
     }
 
-    private void loadScene() throws IOException {
+    private void loadScene() throws IOException, SQLException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/chatForm.fxml"));
         Parent parent = loader.load();
