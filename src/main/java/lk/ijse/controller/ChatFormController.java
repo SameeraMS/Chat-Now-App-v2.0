@@ -47,7 +47,7 @@ public class ChatFormController {
                 if (chatDto.getId().equals("me") && chatDto.getImage() == null) {
                     appendText(chatDto.getMessage());
                 } else if (chatDto.getId().equals("me") && chatDto.getMessage() == null){
-                    setImage(chatDto.getImage().readAllBytes(), chatDto.getId());
+                    setmyimage(chatDto.getImage().readAllBytes());
                     } else if (!chatDto.getId().equals("me") && chatDto.getImage() == null) {
                         writeMessage(chatDto.getMessage());
                         } else if (!chatDto.getId().equals("me") && chatDto.getMessage() == null) {
@@ -58,7 +58,7 @@ public class ChatFormController {
     }
     public void setClient(Client client) throws IOException, SQLException {
         this.client = client;
-       // retrieveMsg();
+        retrieveMsg();
         String msg =" joined the chat";
         appendText(msg);
         client.sendMessage(msg);
@@ -147,7 +147,7 @@ public class ChatFormController {
             messageLbl.setStyle("-fx-background-color: rgb(128,128,128);-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
             hBox.getChildren().add(messageLbl);
             vBox.getChildren().add(hBox);
-            model.saveChat(new ChatDto(client.getName(),"me",message,null));
+          //  model.saveChat(new ChatDto(client.getName(),"me",message,null));
         //    System.out.println(message);   //my msg
         } else {
             HBox hBox = new HBox();
@@ -200,6 +200,22 @@ public class ChatFormController {
         }
     }
 
+    public void setmyimage(byte[] imgByte){
+
+        byte[] bytes = imgByte;
+        HBox hBox = new HBox();
+        hBox.setStyle("-fx-fill-height: true; -fx-min-height: 50; -fx-pref-width: 520; -fx-max-width: 520; -fx-padding: 10; -fx-alignment: center-right;");
+
+        // Display the image in an ImageView or any other UI component
+        ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(bytes)));
+        imageView.setStyle("-fx-padding: 10px;");
+        imageView.setFitHeight(180);
+        imageView.setFitWidth(100);
+
+        hBox.getChildren().addAll(imageView);
+        vBox.getChildren().add(hBox);
+    }
+
     public void setImage(byte[] bytes, String sender) {
         HBox hBox = new HBox();
         Label messageLbl = new Label(sender);
@@ -232,7 +248,7 @@ public class ChatFormController {
             Label messageLbl = new Label(message);
             messageLbl.setStyle("-fx-background-color:   #2980b9;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
             hBox.getChildren().add(messageLbl);
-            model.saveChat(new ChatDto(lblName.getText(),null,message,null));
+            model.saveChat(new ChatDto(lblName.getText(),"from",message,null));
             Platform.runLater(() -> vBox.getChildren().add(hBox));
          //   System.out.println(message);  //with sender name
     }
