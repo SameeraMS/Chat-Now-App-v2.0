@@ -14,4 +14,5 @@ public class ChatDto {
     private String id;
     private String message;
     private InputStream image;
+    private String time;
 }

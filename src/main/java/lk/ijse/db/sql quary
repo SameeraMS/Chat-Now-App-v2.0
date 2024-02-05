@@ -12,5 +12,6 @@ CREATE TABLE chat(
                      username VARCHAR(20),
                      id VARCHAR(20),
                      massage VARCHAR(250),
-                     image LONGBLOB
+                     image LONGBLOB,
+                     time VARCHAR(30)
 );

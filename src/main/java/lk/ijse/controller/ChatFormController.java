@@ -20,6 +20,8 @@ import lombok.Setter;
 import java.io.*;
 import java.nio.file.Files;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ChatFormController {
@@ -45,16 +47,56 @@ public class ChatFormController {
         if (!(chat == null)) {
             for (ChatDto chatDto : chat) {
                 if (chatDto.getId().equals("me") && chatDto.getImage() == null) {
-                    appendText(chatDto.getMessage());
+                    retriveMyMsg(chatDto.getMessage());
                 } else if (chatDto.getId().equals("me") && chatDto.getMessage() == null){
                     setmyimage(chatDto.getImage().readAllBytes());
                     } else if (!chatDto.getId().equals("me") && chatDto.getImage() == null) {
-                        writeMessage(chatDto.getMessage());
+                        retriveOtherMsg(chatDto.getMessage());
                         } else if (!chatDto.getId().equals("me") && chatDto.getMessage() == null) {
-                            setImage(chatDto.getImage().readAllBytes(), chatDto.getId());
+                            setOthersImage(chatDto.getImage().readAllBytes(), chatDto.getId());
                             }
             }
         }
+    }
+
+    public void setOthersImage(byte[] bytes, String sender) {
+        HBox hBox = new HBox();
+        Label messageLbl = new Label(sender);
+        messageLbl.setStyle("-fx-background-color:   #2980b9;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
+
+        hBox.setStyle("-fx-fill-height: true; -fx-min-height: 50; -fx-pref-width: 520; -fx-max-width: 520; -fx-padding: 10; " + (sender.equals(client.getName()) ? "-fx-alignment: center-right;" : "-fx-alignment: center-left;"));
+        // Display the image in an ImageView or any other UI component
+        Platform.runLater(() -> {
+            ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(bytes)));
+            imageView.setStyle("-fx-padding: 10px;");
+            imageView.setFitHeight(180);
+            imageView.setFitWidth(100);
+
+            hBox.getChildren().addAll(messageLbl, imageView);
+            vBox.getChildren().add(hBox);
+        });
+    }
+
+    public void retriveOtherMsg(String message) throws SQLException {
+        //print msg on other clients
+        HBox hBox = new HBox();
+        hBox.setStyle("-fx-alignment: center-left;-fx-fill-height: true;-fx-min-height: 50;-fx-pref-width: 520;-fx-max-width: 520;-fx-padding: 10");
+        Label messageLbl = new Label(message);
+        messageLbl.setStyle("-fx-background-color:   #2980b9;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
+        hBox.getChildren().add(messageLbl);
+        Platform.runLater(() -> vBox.getChildren().add(hBox));
+        //   System.out.println(message);  //with sender name
+    }
+    void retriveMyMsg(String message) throws SQLException {
+        // print in my chat
+            HBox hBox = new HBox();
+            hBox.setStyle("-fx-alignment: center-right;-fx-fill-height: true;-fx-min-height: 50;-fx-pref-width: 520;-fx-max-width: 520;-fx-padding: 10");
+            Label messageLbl = new Label(message);
+            messageLbl.setStyle("-fx-background-color:  purple;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
+            hBox.getChildren().add(messageLbl);
+            vBox.getChildren().add(hBox);
+            //   System.out.println(message);   //my msg
+
     }
     public void setClient(Client client) throws IOException, SQLException {
         this.client = client;
@@ -156,7 +198,8 @@ public class ChatFormController {
             messageLbl.setStyle("-fx-background-color:  purple;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
             hBox.getChildren().add(messageLbl);
             vBox.getChildren().add(hBox);
-            model.saveChat(new ChatDto(lblName.getText(),"me",message,null));
+            model.saveChat(new ChatDto(lblName.getText(),"me",message,
+                    null, LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss"))));
          //   System.out.println(message);   //my msg
 
         }
@@ -193,7 +236,8 @@ public class ChatFormController {
                 vBox.getChildren().add(hBox);
 
                 client.sendImage(bytes);
-                model.saveChat(new ChatDto(lblName.getText(),"me",null,inputStream));
+                model.saveChat(new ChatDto(lblName.getText(),"me",null,
+                        inputStream,LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss"))));
             } catch (IOException | SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -231,7 +275,8 @@ public class ChatFormController {
 
             InputStream image = new ByteArrayInputStream(bytes);
             try {
-                model.saveChat(new ChatDto(lblName.getText(),sender,null,image));
+                model.saveChat(new ChatDto(lblName.getText(),sender,null,
+                        image,LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss"))));
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
@@ -248,7 +293,8 @@ public class ChatFormController {
             Label messageLbl = new Label(message);
             messageLbl.setStyle("-fx-background-color:   #2980b9;-fx-background-radius:15;-fx-font-size: 18;-fx-font-weight: normal;-fx-text-fill: white;-fx-wrap-text: true;-fx-alignment: center-left;-fx-content-display: left;-fx-padding: 10;-fx-max-width: 350;");
             hBox.getChildren().add(messageLbl);
-            model.saveChat(new ChatDto(lblName.getText(),"from",message,null));
+            model.saveChat(new ChatDto(lblName.getText(),"from",message,
+                    null,LocalDateTime.now().format(DateTimeFormatter.ofPattern("hh:mm:ss"))));
             Platform.runLater(() -> vBox.getChildren().add(hBox));
          //   System.out.println(message);  //with sender name
     }
